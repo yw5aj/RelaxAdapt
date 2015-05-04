@@ -1,2 +1,11 @@
+# Archive files
 archive*
+
+# Data files
 *.pkl
+*.mat
+*.csv
+
+# Plots
+*.png
+*.pdf
