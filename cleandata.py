@@ -310,17 +310,20 @@ def get_median_curve(curve_list, xnew=np.r_[0:1:1000j]):
 
 
 if __name__ == '__main__':
+    # Switches
+    make_plot = False
     # Clear all old plots
-    """
-    for file_name in os.listdir('./plots/traces'):
-        if file_name.endswith('.png'):
-            os.remove('./plots/traces/'+file_name)
-    """
+    if make_plot:
+        for file_name in os.listdir('./plots/traces'):
+            if file_name.endswith('.png'):
+                os.remove('./plots/traces/'+file_name)
+    # Initiate objects
     cleanFiberList = []
     for filename in os.listdir('./recordings/'):
         if filename.endswith('.mat'):
             cleanFiberList.append(
-                CleanFiber(filename, threshold=.25, pad=300., make_plot=False))
+                CleanFiber(filename, threshold=.25, pad=300.,
+                           make_plot=make_plot))
             print(filename + ' completed...')
     # For the plotting
     for i, cleanFiber in enumerate(cleanFiberList):
