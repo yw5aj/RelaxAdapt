@@ -322,14 +322,17 @@ if __name__ == '__main__':
             cleanFiberList.append(
                 CleanFiber(filename, threshold=.25, pad=300., make_plot=False))
             print(filename + ' completed...')
+    # For the plotting
     for i, cleanFiber in enumerate(cleanFiberList):
         cleanFiber.fiber_id = i
     fig, axs, static_dynamic_array = plot_static_dynamic(
         cleanFiberList, save_data=True)
+    # Getting the ramp-curve profiles
     ramp_time_list = extract_ramp_time(cleanFiberList)
     displ_list = static_dynamic_array[:, 1]
     ramp_time_coeff = np.polyfit(displ_list, ramp_time_list, 1)
     regulated_ramp_curve_list, median_regulated_ramp_curve, popt =\
         extract_regulated_ramp_curve(cleanFiberList)
+    # Save fiber data for modeling use
     with open('./recordings/cleanFiberList.pkl', 'wb') as f:
         pickle.dump(cleanFiberList, f)
